@@ -1,0 +1,25 @@
+.header__container {
+  display: flex;
+  .header__current-tab {
+    width: 400px;
+    overflow-wrap: break-word;
+    .header__current-tab-title {
+    }
+    .header__current-tab-url {
+    }
+  }
+
+  .header__save-details {
+    .header__save-details-collections-list {
+      text-align: center;
+      .header__save-details-collections-list-item {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .header__save-details-cancel-btn{
+        float: right;
+    }
+  }
+}
