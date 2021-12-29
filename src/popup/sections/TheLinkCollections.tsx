@@ -6,14 +6,16 @@ import './styles/TheLinkCollection.scss'
 interface Props {
   linkCollections: LinkCollectionType[];
   removeLink: (collection: string, linkUrl: string) => void;
+  removeCollection: (collection: string) => void;
 }
 
 const TheLinkCollections: React.FC<Props> = ({
   linkCollections,
   removeLink,
+  removeCollection
 }) => {
   return (
-    <div className="link-collection__container">
+    <div className="link-collections__container">
       {linkCollections &&
         linkCollections.map((collection, i) => (
           <LinkCollection
@@ -21,6 +23,7 @@ const TheLinkCollections: React.FC<Props> = ({
             name={collection.name}
             links={collection.links}
             removeLink={removeLink}
+            removeCollection={removeCollection}
           />
         ))}
     </div>

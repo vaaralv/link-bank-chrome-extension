@@ -49,7 +49,7 @@ const Popup = () => {
                   name: collectionName,
                   links: collection.links.concat(newLink),
                 }
-                else return collection
+              else return collection
             })
           );
         } else {
@@ -62,12 +62,18 @@ const Popup = () => {
   };
 
   const removeLink = (collectionName: string, linkUrl: string) => {
-    const newLinkCollection = linkCollections.map(collection => {
-      if (collection.name === collectionName) return {name: collectionName, links: collection.links.filter(link => link.url !== linkUrl)}
+    const newLinkCollections = linkCollections.map(collection => {
+      if (collection.name === collectionName) return { name: collectionName, links: collection.links.filter(link => link.url !== linkUrl) }
       else return collection
     })
 
-    setLinkCollections(newLinkCollection)
+    setLinkCollections(newLinkCollections)
+  }
+
+  const removeCollection = (collectionName: string) => {
+    const newLinkCollections = linkCollections.filter(collection => collection.name !== collectionName)
+
+    setLinkCollections(newLinkCollections)
   }
 
   return (
@@ -85,7 +91,7 @@ const Popup = () => {
         />
       )}
       {linkCollections ? (
-        <TheLinkCollections linkCollections={linkCollections} removeLink={removeLink}/>
+        <TheLinkCollections linkCollections={linkCollections} removeLink={removeLink} removeCollection={removeCollection} />
       ) : null}
     </div>
   );

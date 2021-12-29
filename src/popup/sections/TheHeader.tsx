@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "../../types";
+import { ErrorMessage, Link } from "../../types";
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -18,11 +18,18 @@ const CreateNewCollection: React.FC<Props> = ({
   collectionNames,
 }) => {
   const [input, setInput] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<ErrorMessage>({ active: false, type: '', message: '' });
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value)
+    setError({ active: false, type: '', message: '' })
+  }
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(input);
+    if (!input) setError({ active: true, type: 'no-input', message: 'Give the new collection a name' })
+    else if (collectionNames.includes(input)) setError({ active: true, type: 'collection-exists', message: `Collection ${input} already exists. Give a different name.` })
+    else saveLink(input)
   };
   return (
     <div className="create-new-collection">
@@ -32,9 +39,13 @@ const CreateNewCollection: React.FC<Props> = ({
           <input
             type="text"
             value={input}
-            onChange={(event) => setInput(event.target.value)}
+            onChange={handleOnChange}
+
           />
+          <button type="submit">Save</button>
         </label>
+        {error.active && <span>{error.message}</span>
+        }
       </form>
     </div>
   );
@@ -74,7 +85,7 @@ const SaveButton: React.FC<Props> = ({ saveLink, collectionNames }) => {
                 </div>
               ))}
             </div>
-            <CreateNewCollection saveLink={saveLink} collectionNames={collectionNames}/>
+            <CreateNewCollection saveLink={saveLink} collectionNames={collectionNames} />
             <button
               className="header__save-details-cancel-btn"
               onClick={() => setOpen(false)}

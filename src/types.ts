@@ -8,4 +8,10 @@ export interface LinkCollection {
     links: Link[]
 }
 
+export interface ErrorMessage {
+    active: boolean,
+    type: string,
+    message: string
+}
+
 export type Tab = chrome.tabs.Tab;

@@ -1,20 +1,25 @@
-.link-collection__links {
-  .link-collection__link {
-    display: flex;
-    flex-direction: row;
+.link-collection__container {
 
-    .link-collection__link-title-and-url {
-      width: 100%;
-      .link-collection__link-title {
+  .link-collection__links {
+    .link-collection__link {
+      display: flex;
+      flex-direction: row;
+  
+      .link-collection__link-title-and-url {
+        width: 100%;
+        .link-collection__link-title {
+        }
+        .link-collection__link-url {
+        }
       }
-      .link-collection__link-url {
-      }
-    }
-
-    .link-collection__link-remove-icon {
-      &:hover {
-        cursor: pointer;
+  
+      .link-collection__link-remove-icon {
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
+  
 }
+
