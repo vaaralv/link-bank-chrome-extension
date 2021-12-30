@@ -8,10 +8,12 @@ export interface LinkCollection {
     links: Link[]
 }
 
-export interface ErrorMessage {
+export interface InputMessage {
     active: boolean,
-    type: string,
+    error: boolean,
     message: string
 }
+
+export type Group = 'linkCollections' | 'tabSessions'
 
 export type Tab = chrome.tabs.Tab;

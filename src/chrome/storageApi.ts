@@ -5,7 +5,7 @@ interface StorageReturnData {
 
 export const storageSet = (key: string, value: any) => {
   
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       chrome.storage.sync.set({[key]: value}, () => {
         if (chrome.runtime.lastError) {
           reject("Failed to store object.");
@@ -31,7 +31,7 @@ export const storageSet = (key: string, value: any) => {
   
   export const storageRemove = (storageKey: string) => {
   
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       chrome.storage.sync.remove(storageKey, () => {
         if (chrome.runtime.lastError) {
           reject("Failed to remove object.");

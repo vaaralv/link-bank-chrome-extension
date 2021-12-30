@@ -1,0 +1,51 @@
+.current-tab-save__container {
+  .current-tab-save__current-tab-and-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .current-tab-save__current-tab {
+      width: 400px;
+      overflow-wrap: break-word;
+      .current-tab-save__current-tab-title {
+      }
+      .current-tab-save__current-tab-url {
+      }
+    }
+  }
+
+  .current-tab-save__save-details {
+    .current-tab-save__save-details-collections-list {
+      text-align: center;
+      .current-tab-save__save-details-collections-list-item {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .current-tab-save__save-details-cancel-btn {
+      float: right;
+    }
+  }
+}
+
+.tab-session-save__container {
+  .tab-session-save__links-and-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .tab-session-save__links {
+      padding: 12px;
+      width: 500px;
+      height: 160px;
+      overflow-y: scroll;
+      border: black 1px solid;
+
+      .tab-session-save__link {
+        word-break: break-all;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

@@ -1,23 +1,63 @@
 $primary-color: darkblue;
-$background-color: #BADA55;
+$background-color: #bada55;
 
 // Chrome applies an 8px margin by default (gross).
 body {
-    margin: 0px;
+  margin: 0px;
 }
 
 .popup-container {
-    background-color: $background-color;
-    border: 2px solid $primary-color;
-    color: $primary-color;
-    display: flex;
-    flex-direction: column;
-    height: 700px;
-    width: 700px;
-}
+  background-color: white;
+  padding: 20px;
+  color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  height: 140vh;
+  width: 700px;
 
-.popup-header {
+  .popup__collections-and-sessions {
     display: flex;
     flex-direction: row;
-    width: 400px;
+    justify-content: space-between;
+
+    > div {
+      width: 340px;
+      text-align: center;
+    }
+  }
 }
+
+.link-title {
+  font-weight: bold;
+}
+
+input {
+  width: 80px;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+
+      .link-group__link-title-and-url {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        word-break: break-all;
+        margin-bottom: 8px;
+        text-align: start;
+      }
+
+      .link-group__link-remove-icon {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+  
