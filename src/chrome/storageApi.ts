@@ -1,4 +1,3 @@
-import {Link} from '../types'
 interface StorageReturnData {
   [key: string]: any
 }

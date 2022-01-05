@@ -1,0 +1,8 @@
+.link-group__container {
+  max-height: 300px;
+  overflow-y: scroll;
+
+  .link-group__links {
+    display: inline-block;
+  }
+}

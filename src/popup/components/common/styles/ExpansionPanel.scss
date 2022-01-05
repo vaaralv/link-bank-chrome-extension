@@ -1,0 +1,88 @@
+@import "../../../Popup.scss";
+
+.expansion-panel {
+  border-bottom: 0.0625rem solid lightgray;
+  padding: 6px 16px;
+  height: fit-content;
+
+  &.button {
+    flex-shrink: 0;
+    border-bottom: none;
+    padding: 4px 8px;
+    width: 172px;
+    margin-left: 12px;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.expansion-panel-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.button {
+    justify-content: center;
+    height: 30px;
+    background-color: $background;
+    color: $baby-pink;
+
+    &.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      &:hover {
+        cursor: default;
+        background-color: $background;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hot-pink;
+    }
+  }
+}
+
+.expansion-panel-details {
+  padding-bottom: 12px;
+  padding-top: 12px;
+  position: relative;
+  z-index: 5;
+  background: white;
+
+  &.button {
+    display: inline-block;
+    background: $baby-pink;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 172px;
+  }
+}
+
+.expansion-panel-icon {
+  > svg {
+    color: #757575;
+    height: 1.5rem;
+    transition: transform 0.1s ease;
+  }
+
+  &.disabled {
+    > svg {
+      color: #ccc;
+      cursor: default;
+    }
+  }
+
+  &.expanded {
+    > svg {
+      transform: rotate(-180deg);
+    }
+  }
+}

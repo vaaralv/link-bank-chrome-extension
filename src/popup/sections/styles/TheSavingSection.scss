@@ -1,4 +1,16 @@
+@import "../../Popup.scss";
+
 .current-tab-save__container {
+  background-color: #ffffff;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: $sections-color;
+  height: 100px;
+
+  h2 {
+    margin-bottom: 12px;
+  }
   .current-tab-save__current-tab-and-button {
     display: flex;
     flex-direction: row;
@@ -6,6 +18,9 @@
     .current-tab-save__current-tab {
       width: 400px;
       overflow-wrap: break-word;
+      height: 64px;
+      overflow-y: scroll;
+      padding-right: 12px;
       .current-tab-save__current-tab-title {
       }
       .current-tab-save__current-tab-url {
@@ -14,11 +29,21 @@
   }
 
   .current-tab-save__save-details {
+    .current-tab-save__header {
+      padding: 0px 0px 0px 8px;
+      margin-bottom: 12px;
+    }
     .current-tab-save__save-details-collections-list {
-      text-align: center;
+      padding-top: 8px;
       .current-tab-save__save-details-collections-list-item {
+        padding: 4px 8px 4px 8px;
+        font-weight: bold;
+        //border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+        word-break: break-all;
         &:hover {
           cursor: pointer;
+          background-color: $hot-pink;
+          color: $baby-pink;
         }
       }
     }
@@ -29,23 +54,56 @@
 }
 
 .tab-session-save__container {
+  background-color: #ffffff;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: $sections-color;
+
+  h2 {
+    margin-bottom: 12px;
+  }
+
   .tab-session-save__links-and-button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    .tab-session-save__links {
-      padding: 12px;
-      width: 500px;
-      height: 160px;
-      overflow-y: scroll;
-      border: black 1px solid;
 
-      .tab-session-save__link {
-        word-break: break-all;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 8px;
+    .tab-session-save__links-wrapper {
+      width: 446px;
+      height: 160px;
+      border-radius: 20px;
+      background-color: white;
+      padding: 12px;
+      padding-left: 4px;
+      border: solid lightgray;
+
+      .tab-session-save__links {
+        width: 442px;
+        height: 160px;
+        overflow-y: scroll;
+        background-color: white;
+        padding-right: 12px;
+
+        .tab-session-save__link {
+          word-break: break-all;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 8px;
+        }
       }
     }
   }
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $background;
+}
+::-webkit-scrollbar-track {
+  border-radius: 20px;
 }

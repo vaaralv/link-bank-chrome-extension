@@ -1,0 +1,27 @@
+@import "../../Popup.scss";
+
+.the-groups-section__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 16px;
+
+  .the-groups-section__groups {
+    background-color: $sections-color;
+    width: 340px;
+    text-align: center;
+    height: fit-content;
+    border-radius: 20px;
+
+    ::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 8px;
+      background-color: #ffffff;
+    }
+
+    > h2 {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+}

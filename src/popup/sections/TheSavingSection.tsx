@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import TheCurrentTabSave from "./TheCurrentTabSave";
-import TheTabSessionSave from "./TheTabSessionSave";
-import { Link } from "../../types";
+import TheCurrentTabSave from "../components/TheCurrentTabSave";
+import TheTabSessionSave from "../components/TheTabSessionSave";
+import { Link, Tab } from "../../types";
 
 interface Props {
-  activeTab: Link;
-  tabs: Link[];
+  activeTab: Tab;
+  tabs: Tab[];
   saveLink: (collectionName: string) => void;
   saveTabSession: (sessionName: string) => void;
   sessionNames: string[];
   collectionNames: string[];
+  closeTab: (tabToCloseId) => void;
 }
 
 const TheSavingSection: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const TheSavingSection: React.FC<Props> = ({
   saveTabSession,
   collectionNames,
   sessionNames,
+  closeTab,
 }) => {
   return (
     <div className="the-saving-section__container">
@@ -31,6 +33,7 @@ const TheSavingSection: React.FC<Props> = ({
         tabs={tabs}
         saveTabSession={saveTabSession}
         sessionNames={sessionNames}
+        closeTab={closeTab}
       />
     </div>
   );

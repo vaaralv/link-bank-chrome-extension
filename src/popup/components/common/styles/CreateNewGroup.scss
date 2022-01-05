@@ -1,0 +1,18 @@
+.create-new-collection {
+  padding: 8px 8px 4px 8px;
+
+  .create-new-collection__input-and-button {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .create-new-collection__input-message {
+    &.error {
+      color: rgb(170, 2, 2);
+    }
+  }
+
+  .create-new-collection__header {
+  }
+}

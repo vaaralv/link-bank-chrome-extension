@@ -1,63 +1,168 @@
-$primary-color: darkblue;
-$background-color: #bada55;
+$primary-color: black;
+$hot-pink: #f61067;
+$baby-blue: #84e6f8;
+$baby-pink: #f7cacd;
+$purple: #5e239d;
+$turquoise: #22aed1;
+$yellow: #ead94c;
+$silver: #7798ab;
+$sections-color: white;
+$background: #001d4a;
+$text: #006992;
+$text2: #348aa7;
 
-// Chrome applies an 8px margin by default (gross).
 body {
+  margin: 0px;
+  background-color: $background;
+}
+
+h1 {
+  margin: 20px 0px 0px 0px;
+  text-align: center;
+  font-size: 32px;
+  color: $hot-pink;
+}
+
+h2 {
   margin: 0px;
 }
 
-.popup-container {
-  background-color: white;
+input {
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  height: 20px;
+}
+
+.popup__container {
   padding: 20px;
-  color: $primary-color;
+  padding-top: 0px;
+  color: $text;
   display: flex;
   flex-direction: column;
   height: 140vh;
   width: 700px;
 
-  .popup__collections-and-sessions {
+  .popup__saving-confirmation {
+    position: absolute;
+    background-color: $hot-pink;
+    color: white;
+    width: 740px;
+    height: 20px;
+    margin-left: -20px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
-    > div {
-      width: 340px;
-      text-align: center;
+input {
+  width: 95px;
+}
+
+.btn {
+  height: 18px;
+  line-height: 20px;
+  font-weight: bold;
+  background: none;
+  box-shadow: none;
+  border-radius: 6px;
+  padding: 1px 6px;
+  margin: 12px 8px 0px 0px;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &.cancel {
+    color: gray;
+    float: right;
+    border: 2px solid gray;
+
+    &:hover {
+      background: gray;
+      color: $baby-pink;
     }
   }
+  &.delete {
+    color: $hot-pink;
+    border: 2px solid $hot-pink;
+  }
+  &.open {
+    color: $text;
+    border: 2px solid #006992;
+  }
+}
+
+button {
+  height: 24px;
+  font-weight: bold;
+  background: none;
+  box-shadow: none;
+  border-radius: 6px;
+
+  &.save {
+    color: $text;
+    border: 2px solid $text;
+    margin-left: 4px;
+
+    &:hover {
+      background: $text;
+      color: $baby-pink;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: black;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .link-title {
   font-weight: bold;
 }
 
-input {
-  width: 80px;
+.link-group__link {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 4px;
+
+  &:hover {
+    background: $baby-pink;
+    cursor: pointer;
+  }
+
+  .link-group__link-remove-icon {
+    color: $hot-pink;
+  }
+
+  .link-group__link-title-and-url {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+    text-align: start;
+    padding: 3px 16px 3px 4px;
+  }
 }
 
-::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 7px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-}
+.link-group__link-remove-icon {
+  font-size: 14px;
 
-
-      .link-group__link-title-and-url {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        word-break: break-all;
-        margin-bottom: 8px;
-        text-align: start;
-      }
-
-      .link-group__link-remove-icon {
-        &:hover {
-          cursor: pointer;
+  > svg {
+    &:hover {
+      cursor: pointer;
+      animation: spin 0.5s 1;
+      @keyframes spin {
+        100% {
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
         }
       }
-  
+    }
+  }
+}

@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./Popup.scss";
 import { storageGet, storageSet } from "../chrome/storageApi";
-import { LinkCollection, Link, Group } from "../types";
-import TheLinkCollections from "./sections/TheLinkCollections";
-import TheTabSessions from "./sections/TheTabSessions";
+import { LinkCollection, Link, Group, Tab, SaveConfirmation } from "../types";
 import TheSavingSection from "./sections/TheSavingSection";
+import TheGroupsSection from "./sections/TheGroupsSection";
 
 const Popup = () => {
-  const [tabs, setTabs] = useState<Link[]>([]);
-  const [activeTab, setActiveTab] = useState<Link | undefined>();
+  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [activeTab, setActiveTab] = useState<Tab | undefined>();
   const [linkCollections, setLinkCollections] = useState<LinkCollection[]>([]);
   const [tabSessions, setTabSessions] = useState<LinkCollection[]>([]);
+  const [saveConfirmation, setSaveConfirmation] = useState<SaveConfirmation>({
+    active: false,
+    message: "",
+  });
 
   useEffect(() => {
     chrome.tabs.query({}, function (tabs: any[]) {
-      const links: Link[] = tabs.map((tab) => ({
-        title: tab.title,
-        url: tab.url,
-      }));
-      setTabs(links);
+      setTabs(tabs);
     });
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-      setActiveTab({ title: tabs[0].title, url: tabs[0].url });
+      setActiveTab(tabs[0]);
     });
     storageGet(["linkCollections", "tabSessions"]).then((result) => {
       setLinkCollections(result.linkCollections.map((x) => x));
@@ -38,6 +37,8 @@ const Popup = () => {
   }, [tabSessions]);
 
   const saveLink = (collectionName: string) => {
+    setSaveConfirmation({ active: true, message: "Link saved!" });
+
     const newLink: Link = {
       title: activeTab.title,
       url: activeTab.url,
@@ -68,24 +69,34 @@ const Popup = () => {
         }
       }
     }
+    setTimeout(() => setSaveConfirmation({ active: false, message: "" }), 1500);
   };
 
-  const saveTabSession = (sessionName: string) => {
-    setTabSessions(tabSessions.concat({ name: sessionName, links: tabs }));
+  const saveTabSession = (sessionToSaveName: string) => {
+    setSaveConfirmation({ active: true, message: "Tab Session saved!" });
+    setTabSessions(
+      tabSessions.concat({
+        name: sessionToSaveName,
+        links: tabs.map((tab) => ({ title: tab.title, url: tab.url })),
+      })
+    );
+    setTimeout(() => setSaveConfirmation({ active: false, message: "" }), 1500);
   };
 
   const removeLink = (
     group: Group,
-    collectionName: string,
-    linkUrl: string
+    groupName: string,
+    linkToDeleteUrl: string
   ) => {
     const updatedGroups = (
       group === "linkCollections" ? linkCollections : tabSessions
     ).map((collection) => {
-      if (collection.name === collectionName)
+      if (collection.name === groupName)
         return {
-          name: collectionName,
-          links: collection.links.filter((link) => link.url !== linkUrl),
+          name: groupName,
+          links: collection.links.filter(
+            (link) => link.url !== linkToDeleteUrl
+          ),
         };
       else return collection;
     });
@@ -95,18 +106,30 @@ const Popup = () => {
       : setTabSessions(updatedGroups);
   };
 
-  const removeGroup = (group: Group, collectionName: string) => {
+  const removeGroup = (group: Group, groupToRemoveName: string) => {
     const updatedGroups = (
       group === "linkCollections" ? linkCollections : tabSessions
-    ).filter((collection) => collection.name !== collectionName);
+    ).filter((group) => group.name !== groupToRemoveName);
 
     group === "linkCollections"
       ? setLinkCollections(updatedGroups)
       : setTabSessions(updatedGroups);
   };
 
+  const closeTab = (tabIdToDelete: number) => {
+    chrome.tabs.remove(tabIdToDelete, function () {
+      setTabs(tabs.filter((tab) => tab.id !== tabIdToDelete));
+    });
+  };
+
   return (
-    <div className="popup-container">
+    <div className="popup__container">
+      {saveConfirmation.active && (
+        <div className="popup__saving-confirmation">
+          {saveConfirmation.message}
+        </div>
+      )}
+      <h1>Link Bank</h1>
       {activeTab && tabs.length > 0 && (
         <TheSavingSection
           activeTab={activeTab}
@@ -123,21 +146,17 @@ const Popup = () => {
               ? tabSessions.map((session) => session.name)
               : []
           }
+          closeTab={closeTab}
         />
       )}
       {linkCollections ? (
-        <div className="popup__collections-and-sessions">
-          <TheLinkCollections
-            linkCollections={linkCollections}
-            removeLink={removeLink}
-            removeCollection={removeGroup}
-          />
-          <TheTabSessions
-            tabSessions={tabSessions}
-            removeLink={removeLink}
-            removeSession={removeGroup}
-          />
-        </div>
+        <TheGroupsSection
+          tabSessions={tabSessions}
+          activeTab={activeTab}
+          linkCollections={linkCollections}
+          removeLink={removeLink}
+          removeGroup={removeGroup}
+        />
       ) : null}
     </div>
   );
