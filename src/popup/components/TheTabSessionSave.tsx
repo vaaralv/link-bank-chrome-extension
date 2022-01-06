@@ -37,6 +37,7 @@ const SaveButton: React.FC<Props> = ({ saveTabSession, sessionNames }) => {
         <ExpansionPanelDetails>
           <div className="tab-session-save__save-details">
             <CreateNewGroup
+              center={true}
               setOpen={setOpen}
               group="tabSessions"
               save={saveTabSession}

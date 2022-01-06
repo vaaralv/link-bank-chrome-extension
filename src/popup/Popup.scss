@@ -68,6 +68,7 @@ input {
   border-radius: 6px;
   padding: 1px 6px;
   margin: 12px 8px 0px 0px;
+  width: fit-content;
 
   &:hover {
     cursor: pointer;
@@ -85,10 +86,20 @@ input {
   &.delete {
     color: $hot-pink;
     border: 2px solid $hot-pink;
+    float: right;
+
+    &:hover {
+      background: $hot-pink;
+      color: white;
+    }
   }
   &.open {
     color: $text;
     border: 2px solid #006992;
+    &:hover {
+      background: $text;
+      color: white;
+    }
   }
 }
 
@@ -152,17 +163,14 @@ button {
 
 .link-group__link-remove-icon {
   font-size: 14px;
-
   > svg {
+    transition: 0.5s;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
     &:hover {
       cursor: pointer;
-      animation: spin 0.5s 1;
-      @keyframes spin {
-        100% {
-          -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-        }
-      }
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
     }
   }
 }

@@ -1,8 +1,12 @@
 .link-group__container {
-  max-height: 300px;
-  overflow-y: scroll;
-
+  display: inline-block;
   .link-group__links {
-    display: inline-block;
+    padding-right: 12px;
+
+    max-height: 300px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
   }
 }

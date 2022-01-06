@@ -7,6 +7,7 @@ interface Props {
   save: (groupName: string) => void;
   groupNames: string[];
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  center?: boolean;
 }
 
 const CreateNewGroup: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const CreateNewGroup: React.FC<Props> = ({
   save,
   groupNames,
   setOpen,
+  center,
 }) => {
   const [input, setInput] = useState<string>("");
   const [inputMessage, setInputMessage] = useState<InputMessage>({
@@ -53,9 +55,11 @@ const CreateNewGroup: React.FC<Props> = ({
   };
 
   return (
-    <div className="create-new-collection">
+    <div className={`create-new-collection ${center && "center"}`}>
       <form onSubmit={handleSubmit}>
-        <span className="create-new-collection__header">Create new collection</span>
+        <span className="create-new-collection__header">
+          Create new collection
+        </span>
         <div className="create-new-collection__input-and-button">
           <input type="text" value={input} onChange={handleOnChange} />
           <button className="save" type="submit">

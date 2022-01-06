@@ -1,10 +1,15 @@
 .create-new-collection {
   padding: 8px 8px 4px 8px;
 
+  &.center {
+    text-align: center;
+  }
+
   .create-new-collection__input-and-button {
     display: flex;
     align-items: center;
     margin-top: 8px;
+    width: fit-content;
   }
 
   .create-new-collection__input-message {
